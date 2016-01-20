@@ -1,0 +1,21 @@
+{
+  "name": "nester",
+  "description": "Convert array of {x: N, y: N, height:N, width:N, component:{...}} into nested row object with classes for responsive bootstrap.",
+  "main": "nester.js",
+  "authors": [
+    "Dave Bouwman"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
