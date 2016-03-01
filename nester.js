@@ -35,7 +35,7 @@ module.exports = api;
 //       }
 //       //copy the card
 //       col = JSON.parse(JSON.stringify(card));
-//       col.classNames = 'card-debug col-lg-' + col.width;
+//       col.classNames = 'card-debug col-md-' + col.width;
 //       //console.log(' column class: ', col.classNames);
 //       //if x is not the same as our current x, add an offset
 //       if(col.x !== current.x){
@@ -246,9 +246,9 @@ api.addClassesToCard = function(card, offset, nestingWidth){
     }else{
       width = Math.floor(width);
     }
-    console.log('**** NESTING WIDTH ' + nestingWidth + ' card width: ' + card.width + ' class: col-lg-' + width);
+    console.log('**** NESTING WIDTH ' + nestingWidth + ' card width: ' + card.width + ' class: col-md-' + width);
   }
-  card.classNames = 'card-debug col-lg-' + width;
+  card.classNames = 'card-debug col-md-' + width;
   card.minHeight = card.height * 60;
   if(offset){
     card.classNames = card.classNames + ' col-sm-offset-' + offset;
