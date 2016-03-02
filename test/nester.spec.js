@@ -23,9 +23,9 @@ describe('nester : ', function () {
       it('should have one row ', function () {
         expect(output.length).to.equal(1);
       });
-      it('row should have one col-lg-12', function () {
+      it('row should have one col-md-12', function () {
         expect(output[0].cols.length).to.equal(1);
-        expect(output[0].cols[0].classNames).to.contain('col-lg-12');
+        expect(output[0].cols[0].classNames).to.contain('col-md-12');
       });
     });
 
@@ -42,10 +42,10 @@ describe('nester : ', function () {
         expect(output.length).to.equal(1);
       });
 
-      it('should have two col-lg-6', function () {
+      it('should have two col-md-6', function () {
         expect(output[0].cols.length).to.equal(2);
-        expect(output[0].cols[0].classNames).to.contain('col-lg-6');
-        expect(output[0].cols[1].classNames).to.contain('col-lg-6');
+        expect(output[0].cols[0].classNames).to.contain('col-md-6');
+        expect(output[0].cols[1].classNames).to.contain('col-md-6');
       });
     });
 
@@ -67,11 +67,11 @@ describe('nester : ', function () {
       });
       it('first col: col-sm-offset 1, width:3', function () {
         expect(output[0].cols[0].classNames).to.contain('col-sm-offset-1');
-        expect(output[0].cols[0].classNames).to.contain('col-lg-3');
+        expect(output[0].cols[0].classNames).to.contain('col-md-3');
       });
       it('second col: col-sm-offset 1, width:3', function () {
         expect(output[0].cols[1].classNames).to.contain('col-sm-offset-2');
-        expect(output[0].cols[1].classNames).to.contain('col-lg-3');
+        expect(output[0].cols[1].classNames).to.contain('col-md-3');
       });
 
     });
@@ -94,11 +94,11 @@ describe('nester : ', function () {
       });
       it('first col: no offset width:3', function () {
         expect(output[0].cols[0].classNames).not.to.contain('col-sm-offset');
-        expect(output[0].cols[0].classNames).to.contain('col-lg-3');
+        expect(output[0].cols[0].classNames).to.contain('col-md-3');
       });
       it('second col: col-sm-offset 6, width:3', function () {
         expect(output[0].cols[1].classNames).to.contain('col-sm-offset-6');
-        expect(output[0].cols[1].classNames).to.contain('col-lg-3');
+        expect(output[0].cols[1].classNames).to.contain('col-md-3');
       });
     });
 
@@ -119,10 +119,10 @@ describe('nester : ', function () {
       it('should have two rows ', function () {
         expect(output.length).to.equal(2);
       });
-      it('rows should have one col-lg-12', function () {
+      it('rows should have one col-md-12', function () {
         output.forEach(function(row){
           expect(row.cols.length).to.equal(1);
-          expect(row.cols[0].classNames).to.contain('col-lg-12');
+          expect(row.cols[0].classNames).to.contain('col-md-12');
         });
       });
     });//one col per row
@@ -141,16 +141,16 @@ describe('nester : ', function () {
       it('should have two rows ', function () {
         expect(output.length).to.equal(2);
       });
-      it('row 1 has 3 col-lg-4', function () {
+      it('row 1 has 3 col-md-4', function () {
         expect(output[0].cols.length).to.equal(3);
         output[0].cols.forEach(function(col){
-          expect(col.classNames).to.contain('col-lg-4');
+          expect(col.classNames).to.contain('col-md-4');
         });
       });
-      it('row 2 has 2 col-lg-6', function () {
+      it('row 2 has 2 col-md-6', function () {
         expect(output[1].cols.length).to.equal(2);
         output[1].cols.forEach(function(col){
-          expect(col.classNames).to.contain('col-lg-6');
+          expect(col.classNames).to.contain('col-md-6');
         });
       });
 
@@ -168,15 +168,15 @@ describe('nester : ', function () {
       it('should have two rows ', function () {
         expect(output.length).to.equal(2);
       });
-      it('row 1 has 2 col-lg-4 with an offset', function () {
+      it('row 1 has 2 col-md-4 with an offset', function () {
         expect(output[0].cols.length).to.equal(2);
-        expect(output[0].cols[0].classNames).to.contain('col-lg-4');
-        expect(output[0].cols[1].classNames).to.contain('col-lg-4');
+        expect(output[0].cols[0].classNames).to.contain('col-md-4');
+        expect(output[0].cols[1].classNames).to.contain('col-md-4');
         expect(output[0].cols[1].classNames).to.contain('col-sm-offset-4');
       });
-      it('row 2 has offset and col-lg-6', function () {
+      it('row 2 has offset and col-md-6', function () {
         expect(output[1].cols.length).to.equal(1);
-        expect(output[1].cols[0].classNames).to.contain('col-lg-6');
+        expect(output[1].cols[0].classNames).to.contain('col-md-6');
         expect(output[1].cols[0].classNames).to.contain('col-sm-offset-6');
       });
 
@@ -208,13 +208,13 @@ describe('nester : ', function () {
       it('should have one row', function () {
         expect(output.length).to.equal(1);
       });
-      it('first col should be col-lg-6', function () {
+      it('first col should be col-md-6', function () {
         expect(output[0].cols[1].rows).not.to.be.defined;
-        expect(output[0].cols[1].classNames).to.contain('col-lg-6');
+        expect(output[0].cols[1].classNames).to.contain('col-md-6');
       });
-      it('second col should be col-lg-6 no offset', function () {
+      it('second col should be col-md-6 no offset', function () {
         var col = output[0].cols[1];
-        expect(col.classNames).to.contain('col-lg-6');
+        expect(col.classNames).to.contain('col-md-6');
         expect(col.classNames).not.to.contain('offset');
       });
       it('second col should have nested row with two entries', function () {
@@ -226,9 +226,9 @@ describe('nester : ', function () {
         var col = output[0].cols[1].rows[0].cols[0];
         expect(col.classNames).not.to.contain('offset');
       });
-      it('nested row, col 0, should be col-lg-12', function () {
+      it('nested row, col 0, should be col-md-12', function () {
         var col = output[0].cols[1].rows[0].cols[0];
-        expect(col.classNames).to.contain('col-lg-12');
+        expect(col.classNames).to.contain('col-md-12');
       });
 
     });
@@ -254,31 +254,31 @@ describe('nester : ', function () {
       it('should have one row', function () {
         expect(output.length).to.equal(1);
       });
-      it('first col should be col-lg-4', function () {
+      it('first col should be col-md-4', function () {
         var col = output[0].cols[0];
         expect(col.rows).not.to.be.defined;
-        expect(col.classNames).to.contain('col-lg-4');
+        expect(col.classNames).to.contain('col-md-4');
       });
-      it('second col should be col-lg-8 no offset', function () {
+      it('second col should be col-md-8 no offset', function () {
         var col = output[0].cols[1];
-        expect(col.classNames).to.contain('col-lg-8');
+        expect(col.classNames).to.contain('col-md-8');
         expect(col.classNames).not.to.contain('offset');
       });
-      it('nested row 0, col 0 should be col-lg-8', function () {
+      it('nested row 0, col 0 should be col-md-8', function () {
         var col = output[0].cols[1].rows[0].cols[0];
-        expect(col.classNames).to.contain('col-lg-8');
+        expect(col.classNames).to.contain('col-md-8');
       });
-      it('nested row 0, col 1 should be col-lg-4', function () {
+      it('nested row 0, col 1 should be col-md-4', function () {
         var col = output[0].cols[1].rows[0].cols[1];
-        expect(col.classNames).to.contain('col-lg-4');
+        expect(col.classNames).to.contain('col-md-4');
       });
-      it('nested row 1, col 0 should be col-lg-9', function () {
+      it('nested row 1, col 0 should be col-md-9', function () {
         var col = output[0].cols[1].rows[1].cols[0];
-        expect(col.classNames).to.contain('col-lg-9');
+        expect(col.classNames).to.contain('col-md-9');
       });
-      it('nested row 1, col 1 should be col-lg-3', function () {
+      it('nested row 1, col 1 should be col-md-3', function () {
         var col = output[0].cols[1].rows[1].cols[1];
-        expect(col.classNames).to.contain('col-lg-3');
+        expect(col.classNames).to.contain('col-md-3');
       });
 
 
@@ -304,14 +304,14 @@ describe('nester : ', function () {
       it('should have one row', function () {
         expect(output.length).to.equal(1);
       });
-      it('first col should be col-lg-4', function () {
+      it('first col should be col-md-4', function () {
         var col = output[0].cols[0];
         expect(col.rows).not.to.be.defined;
-        expect(col.classNames).to.contain('col-lg-4');
+        expect(col.classNames).to.contain('col-md-4');
       });
-      it('second col should be col-lg-8 no offset', function () {
+      it('second col should be col-md-8 no offset', function () {
         var col = output[0].cols[1];
-        expect(col.classNames).to.contain('col-lg-8');
+        expect(col.classNames).to.contain('col-md-8');
         expect(col.classNames).not.to.contain('offset');
       });
 
@@ -358,7 +358,7 @@ describe('nester : ', function () {
       });
       it('second row: first col should have classNames', function () {
         expect(output[1].cols[0].classNames).to.be.defined;
-        expect(output[1].cols[0].classNames).to.contain('col-lg-12');
+        expect(output[1].cols[0].classNames).to.contain('col-md-12');
       });
 
     });
@@ -563,10 +563,10 @@ describe('nester : ', function () {
           expect(output.length).to.equal(2);
         });
         it('first col should be a normal column', function () {
-          expect(output[0].classNames).to.contain('col-lg-6');
+          expect(output[0].classNames).to.contain('col-md-6');
         });
         it('second col should have classNames', function () {
-          expect(output[1].classNames).to.contain('col-lg-6');
+          expect(output[1].classNames).to.contain('col-md-6');
         });
         it('second col should have row array length 2', function () {
           expect(output[1].rows.length).to.equal(2);
