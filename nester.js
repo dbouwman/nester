@@ -10,73 +10,9 @@ var _ = require('lodash');
 var api = {};
 module.exports = api;
 
-// api.convertOld = function(cards){
-//   var rows = [], row, col,
-//         heightInterval = 60,
-//         rowHeight=0,
-//         current = {x: null, y: null};
-//
-//     cards.forEach(function(card){
-//       //ensure ints
-//       card.x = parseInt(card.x,10);
-//       card.y = parseInt(card.y,10);
-//       card.height = parseInt(card.height,10);
-//       card.width = parseInt(card.width,10);
-//       card.offset = 0;
-//       if(card.y !== current.y){
-//         //create a row
-//         row = {
-//           cols:[]
-//         };
-//         //add to rows array
-//         rows.push(row);
-//         current.x = 0;
-//         current.y = card.y;
-//       }
-//       //copy the card
-//       col = JSON.parse(JSON.stringify(card));
-//       col.classNames = 'card-debug col-lg-' + col.width;
-//       //console.log(' column class: ', col.classNames);
-//       //if x is not the same as our current x, add an offset
-//       if(col.x !== current.x){
-//         console.log('::OFFSET: col.x: ' + col.x + ' card.x: ' + card.x + ' cur.x:' + current.x + ' offset: ' +(card.x - current.x));
-//         card.offset =  (card.x - current.x);
-//         col.classNames = col.classNames + ' col-sm-offset-' + (card.x - current.x);
-//         //console.log(' column class with offset: ', col.classNames);
-//       }
-//       //set the height for styling
-//       col.minHeight = card.height * heightInterval;
-//
-//       //push the col/card into the cols array
-//       row.cols.push(col);
-//
-//       current.x += card.width + card.offset;
-//
-//     });
-//
-//     return rows;
-// };
-
 api.convert = function(cards){
   return api.getRows(cards);
-  //return api.convertOld(cards);
 };
-
-// api.logCard= function(card){
-//   console.log(' card: x: ' + card.x + ' y:' + card.y + ' h:' + card.height + ' w:' + card.width);
-// };
-
-
-// api.maxHeightInRow = function(cards, row){
-//   var heights = cards.map(function(card){
-//     if(card.y === row){
-//       return card.height;
-//     }else{
-//       return 0;
-//     }
-//   });
-//   return api._max(heights);
-// };
 
 
 api._max = function(ar){
@@ -112,19 +48,19 @@ api.getRows = function(cards, isNested, nestingWidth){
  isNested = isNested || false;
 
  while(remainingCards.length){
-   console.info('Looking for rows starting at Y:' + startY);
+   //console.info('Looking for rows starting at Y:' + startY);
    var output = api.getRow(remainingCards, startY);
    if(output){
-     console.info('   ' + output.cardsInRow.length + ' cards in row');
+     //console.info('   ' + output.cardsInRow.length + ' cards in row');
      //do something to cook columns here
      rows.push({cols: api.getColumns(output.cardsInRow, isNested, nestingWidth)});
      startY = output.maxY;
-     console.info('   ' + output.remainingCards.length + ' cards left');
+     //console.info('   ' + output.remainingCards.length + ' cards left');
      remainingCards = output.remainingCards;
    }
  }
- console.log('Returning:');
- console.log(JSON.stringify(rows));
+ //console.log('Returning:');
+ //console.log(JSON.stringify(rows));
  return rows;
 };
 
@@ -156,7 +92,7 @@ api.getColumns = function(cards, isNested, nestingWidth){
 };
 
 api.getColumn = function(cards, startX, isNested, nestingWidth){
-  console.log('Looking for column starting at x: ' + startX + ' isNested: ' + isNested + ' nestingWidth: ' + nestingWidth);
+  //console.log('Looking for column starting at x: ' + startX + ' isNested: ' + isNested + ' nestingWidth: ' + nestingWidth);
   var colBreakX = startX,
       check = false,
       cont = true,
@@ -167,13 +103,13 @@ api.getColumn = function(cards, startX, isNested, nestingWidth){
   //Iteratively look for intersections
   //we are actually looking for "misses" i.e. "gaps" in the layout where we split things into columns
   while( cont ){
-    //console.log('   Checking for X intersection at ' + colBreakX + ' offset: ' + offset);
+    ////console.log('   Checking for X intersection at ' + colBreakX + ' offset: ' + offset);
     check = api.checkXIntersection(cards,colBreakX);
     //if we got an intersection...
     if(check){
       //and we've never gotten one before
       if(!everIntersected){
-        //console.log('   Found first X intersection at ' + colBreakX + ' offset: ' + offset);
+        ////console.log('   Found first X intersection at ' + colBreakX + ' offset: ' + offset);
         everIntersected = true;
       }
       //increment the colBreakX so we keep looking
@@ -181,22 +117,22 @@ api.getColumn = function(cards, startX, isNested, nestingWidth){
     }else{
       //if we get a 'miss', have we ever intersected anything?
       if(!everIntersected){
-        //console.log('   No X intersection at ' + colBreakX + ' and no intersection found yet...');
+        ////console.log('   No X intersection at ' + colBreakX + ' and no intersection found yet...');
         if(!isNested && colBreakX > startX){
           offset++;
         }
         colBreakX++;
       }else{
         //ok we have the col break we want
-        //console.log('   Column break found at ' + colBreakX);
+        ////console.log('   Column break found at ' + colBreakX);
         cont = false;
       }
     }
   }
-  console.log('Found Col break at ' + colBreakX + ' offset: ' + offset);
+  //console.log('Found Col break at ' + colBreakX + ' offset: ' + offset);
   //return the cards that are in this row
   var cardsInColumn = api.cardsInXRange(cards, startX, colBreakX);
-  //console.log('CARDS IN COL: ' + JSON.stringify(cardsInColumn));
+  ////console.log('CARDS IN COL: ' + JSON.stringify(cardsInColumn));
   if(cardsInColumn.length){
     if(cardsInColumn.length === 1){
       colCard = api.addClassesToCard(cardsInColumn[0], offset, nestingWidth);
@@ -213,7 +149,7 @@ api.getColumn = function(cards, startX, isNested, nestingWidth){
           return card.width;
         }
       }));
-      console.log('=====> TOTAL WIDTH IN THIS BLOCK: ' + totalWidthCardsWithMinY);
+      //console.log('=====> TOTAL WIDTH IN THIS BLOCK: ' + totalWidthCardsWithMinY);
       colCard.width = totalWidthCardsWithMinY;
       api.addClassesToCard(colCard, offset);
       //cut up the cards in this column into rows
@@ -221,10 +157,10 @@ api.getColumn = function(cards, startX, isNested, nestingWidth){
     }
   }else{
     //no cards found using that break
-    console.log('NO CARDS FOUND IN RANGE')
+    //console.log('NO CARDS FOUND IN RANGE')
   }
 
-  //console.log('CARD: ' + JSON.stringify(colCard));
+  ////console.log('CARD: ' + JSON.stringify(colCard));
   return {
     maxX: colBreakX,
     col: colCard,
@@ -246,7 +182,7 @@ api.addClassesToCard = function(card, offset, nestingWidth){
     }else{
       width = Math.floor(width);
     }
-    console.log('**** NESTING WIDTH ' + nestingWidth + ' card width: ' + card.width + ' class: col-lg-' + width);
+    //console.log('**** NESTING WIDTH ' + nestingWidth + ' card width: ' + card.width + ' class: col-lg-' + width);
   }
   card.classNames = 'card-debug col-lg-' + width;
   card.minHeight = card.height * 60;
@@ -268,7 +204,7 @@ api.getRow = function(cards, startY){
   while(api.checkYIntersection(cards, rowBreakY)){
     rowBreakY++;
   }
-  console.info('  rowBreakY:' + rowBreakY);
+  //console.info('  rowBreakY:' + rowBreakY);
   //return the cards that are in this row
   return {
     maxY: rowBreakY,
@@ -282,7 +218,7 @@ api.checkYIntersection=function(cards, y){
   //of the stack, so bump to 1;
 
   return cards.some(function(card){
-    //console.log('y: ' + y + ' c.y: ' + card.y + ' c.y + c.h: ' + (card.y + card.height));
+    ////console.log('y: ' + y + ' c.y: ' + card.y + ' c.y + c.h: ' + (card.y + card.height));
     return (card.y < y && (card.y + card.height) > y)
   });
 };
@@ -291,7 +227,7 @@ api.checkYIntersection=function(cards, y){
 
 api.checkXIntersection=function(cards, x){
   return cards.some(function(card){
-    //console.log('x: ' + x + ' c.x: ' + card.x + ' c.x + c.w: ' + (card.x + card.width));
+    ////console.log('x: ' + x + ' c.x: ' + card.x + ' c.x + c.w: ' + (card.x + card.width));
     return (card.x < x && (card.x + card.width) > x)
   });
 }
@@ -300,7 +236,7 @@ api.checkXIntersection=function(cards, x){
 
 api.cardsInXRange = function(cards, xmin, xmax){
   var out =  _.filter(cards, function(card){
-    //console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
+    ////console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
     return (card.x >= xmin && (card.x + card.width) <= xmax );
   });
   return out;
@@ -308,7 +244,7 @@ api.cardsInXRange = function(cards, xmin, xmax){
 
 api.cardsNotInXRange = function(cards, xmin, xmax){
   var out =  _.filter(cards, function(card){
-    //console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
+    ////console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
     return (card.x >= xmax || (card.x + card.width) <= xmin );
   });
   return out;
@@ -320,17 +256,17 @@ api.cardsNotInXRange = function(cards, xmin, xmax){
  */
 api.cardsInYRange = function(cards, ymin, ymax){
   var out =  _.filter(cards, function(card){
-    //console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
+    ////console.log('card.y: ' + card.y + ' ymin: ' + ymin + ' (card.y + card.height):' + (card.y + card.height) + ' ' + ymax);
     return (card.y >= ymin && (card.y + card.height) <= ymax );
   });
-  //console.log('OUT: ', out);
+  ////console.log('OUT: ', out);
   return out;
 };
 api.cardsNotInYRange = function(cards, ymin, ymax){
   var out =  _.filter(cards, function(card){
-    //console.log('card.y: ' + card.y + ' >= ' + ymax + ' (card.y + card.height):' + (card.y + card.height) + ' <=' + ymin);
+    ////console.log('card.y: ' + card.y + ' >= ' + ymax + ' (card.y + card.height):' + (card.y + card.height) + ' <=' + ymin);
     return ( card.y >= ymax || (card.y + card.height) <= ymin  );
   });
-  //console.log('OUT: ', out);
+  ////console.log('OUT: ', out);
   return out;
 };
