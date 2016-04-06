@@ -1,6 +1,6 @@
 {
   "name": "nester",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Convert array of {x: N, y: N, height:N, width:N, component:{...}} into nested row object with classes for responsive bootstrap.",
   "main": "index.js",
   "dependencies": {
@@ -13,14 +13,13 @@
     "mocha": "^2.3.4"
   },
   "browserify": {
-		"transform": [
-			"browserify-global-shim"
-		]
-	},
-  "browserify-global-shim": {
-  	"lodash": "_"
+    "transform": [
+      "browserify-global-shim"
+    ]
   },
-
+  "browserify-global-shim": {
+    "lodash": "_"
+  },
   "scripts": {
     "test": "mocha",
     "build": "browserify nester.js -o dist/browser/nester.js -s nester"
