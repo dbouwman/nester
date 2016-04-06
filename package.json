@@ -1,6 +1,6 @@
 {
   "name": "nester",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Convert array of {x: N, y: N, height:N, width:N, component:{...}} into nested row object with classes for responsive bootstrap.",
   "main": "index.js",
   "dependencies": {
