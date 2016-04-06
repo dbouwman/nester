@@ -10,6 +10,7 @@ var _ = require('lodash');
 var api = {};
 module.exports = api;
 
+
 api.convert = function(cards){
   return api.getRows(cards);
 };
@@ -184,7 +185,7 @@ api.addClassesToCard = function(card, offset, nestingWidth){
     }
     //console.log('**** NESTING WIDTH ' + nestingWidth + ' card width: ' + card.width + ' class: col-lg-' + width);
   }
-  card.classNames = 'card-debug col-lg-' + width;
+  card.classNames = 'card-debug col-md-' + width;
   card.minHeight = card.height * 60;
   if(offset){
     card.classNames = card.classNames + ' col-sm-offset-' + offset;
