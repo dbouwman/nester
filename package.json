@@ -22,7 +22,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "build": "browserify nester.js -o dist/browser/nester.js -s nester"
+    "build": "browserify nester.js -o dist/browser/nester.js -s nester",
+    "publish":"bower register nester https://github.com/dbouwman/nester.git"
   },
   "author": "Dave Bouwman",
   "license": "MIT"
